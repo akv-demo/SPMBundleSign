@@ -51,4 +51,5 @@ jobs:
           sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
           xcode-select -p
           # security find-identity -v -p codesigning
-          fastlane build --verbose
+          # fastlane build --verbose
+          ./archive.sh
