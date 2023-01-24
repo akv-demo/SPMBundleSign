@@ -4,6 +4,7 @@ on:
 
 jobs:
   build:
+    if: ${{ always() }}
     strategy:
       matrix:
         xcode: ["13.4", "14.2"]
@@ -52,4 +53,4 @@ jobs:
           xcode-select -p
           # security find-identity -v -p codesigning
           # fastlane build --verbose
-          ./archive.sh
+          ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution"
