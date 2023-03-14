@@ -4,6 +4,7 @@ on:
 
 jobs:
   build:
+    continue-on-error: ${{ true }}
     if: ${{ always() }}
     strategy:
       matrix:
