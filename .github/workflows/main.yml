@@ -49,19 +49,19 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
-       - run: |
+      - run: |
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
            # security find-identity -v -p codesigning
            # fastlane build --verbose
            ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution"
-         if: ${{ false }}
-         name: "xcodebuild'
+        if: ${{ false }}
+        name: "xcodebuild'
 
-       - run: |
+      - run: |
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
            security find-identity -v -p codesigning
            bundle update
            bundle exec fastlane build --verbose
-         name: "fastlane'
+        name: "fastlane'
