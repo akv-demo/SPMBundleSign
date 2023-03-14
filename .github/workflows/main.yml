@@ -48,7 +48,15 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          
+
+      - run: |
+           sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+           xcode-select -p
+           security find-identity -v -p codesigning
+           bundle update
+           bundle exec fastlane build --verbose
+        name: "fastlane'
+
       - run: |
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
@@ -58,10 +66,3 @@ jobs:
         if: ${{ false }}
         name: "xcodebuild'
 
-      - run: |
-           sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
-           xcode-select -p
-           security find-identity -v -p codesigning
-           bundle update
-           bundle exec fastlane build --verbose
-        name: "fastlane'
