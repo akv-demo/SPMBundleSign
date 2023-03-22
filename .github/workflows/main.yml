@@ -84,5 +84,5 @@ jobs:
            ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution" CODE_SIGN_STYLE="Manual" DEVELOPMENT_TEAM="7V2Y6HDP66"
         if: ${{ true }}
         continue-on-error: true
-        name: "xcodebuild CODE_SIGN_IDENTITY only"
+        name: "xcodebuild CODE_SIGN_IDENTITY CODE_SIGN_STYLE DEVELOPMENT_TEAM"
 
