@@ -48,20 +48,37 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          
+
       - run: |
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
            security find-identity -v -p codesigning
            bundle update
            bundle exec fastlane build --verbose
+        if: ${{ false }}
         name: "fastlane"
-        
+
+      - run: |
+           sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+           xcode-select -p
+           # security find-identity -v -p codesigning
+           ./archive.sh 
+        if: ${{ true }}
+        name: "xcodebuild"
+
       - run: |
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
            # security find-identity -v -p codesigning
            ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution"
-        if: ${{ false }}
-        name: "xcodebuild"
+        if: ${{ true }}
+        name: "xcodebuild CODE_SIGN_IDENTITY only"
+
+      - run: |
+           sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
+           xcode-select -p
+           # security find-identity -v -p codesigning
+           ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution" CODE_SIGN_STYLE="Manual" DEVELOPMENT_TEAM="7V2Y6HDP66"
+        if: ${{ true }}
+        name: "xcodebuild CODE_SIGN_IDENTITY only"
 
