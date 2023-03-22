@@ -61,7 +61,6 @@ jobs:
            sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app
            xcode-select -p
            # security find-identity -v -p codesigning
-           # fastlane build --verbose
            ./archive.sh CODE_SIGN_IDENTITY="Apple Distribution"
         if: ${{ false }}
         name: "xcodebuild"
